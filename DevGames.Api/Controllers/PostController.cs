@@ -43,7 +43,7 @@ namespace DevGames.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(AddPostInputModel model, int id)
+        public IActionResult Post(int id, AddPostInputModel model)
         {
             var responsePost = _devGamesContext.Boards.SingleOrDefault(i => i.Id == id);
             if (responsePost == null) return NotFound();
@@ -51,7 +51,7 @@ namespace DevGames.Api.Controllers
             //var posts = new Post(model.Id, model.Title, model.Description);
             var posts = _mapper.Map<Post>(model);
             responsePost.AddPost(posts);
-            return CreatedAtAction(nameof(GetById), new {id = id , postId = model.Id}, model);
+            return CreatedAtAction(nameof(GetById), new {id = id , postId = posts.Id}, model);
         }
 
         
@@ -64,9 +64,8 @@ namespace DevGames.Api.Controllers
             var posts = responsePost.Posts.SingleOrDefault(p => p.Id == id);
             if (posts == null) return NotFound();
 
-            var comments = new Comment(model.Title, model.Description, model.User);
+            var comments = new Comment(model.Title, model.Description, model.User, posts.Id);
             posts.AddComments(comments);
-            
             return NoContent();
         }
     }

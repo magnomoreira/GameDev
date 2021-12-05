@@ -14,6 +14,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DevGames.Api.Mappers;
 using DevGames.Api.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace DevGames.Api
 {
@@ -30,7 +31,7 @@ namespace DevGames.Api
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddAutoMapper(typeof(BoardMappers));
-			services.AddSingleton<DevGamesContext>();
+			services.AddDbContext<DevGamesContext>(o => o.UseSqlServer(Configuration.GetConnectionString(name: "DevGamesCs")));
 			services.AddControllers();
 			services.AddSwaggerGen(c =>
 			{

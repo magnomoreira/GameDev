@@ -35,11 +35,11 @@ namespace DevGames.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(AddBoardInputModel model)
+        public IActionResult Post( AddBoardInputModel model)
         {
             var responseBoard = _mapper.Map<Board>(model);
             _devGamesContext.Boards.Add(responseBoard);
-            return CreatedAtAction("GetById", new {id = model.Id}, model);
+            return CreatedAtAction("GetById", new {id = responseBoard.Id}, model);
         }
 
         [HttpPut("id")]
