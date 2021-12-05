@@ -4,9 +4,8 @@ namespace DevGames.Api.Entities
 {
     public class Board
     {
-        public Board(int id, string gameTitle, string description, string rules)
+        public Board(string gameTitle, string description, string rules)
         {
-            Id = id;
             GameTitle = gameTitle;
             Description = description;
             Rules = rules;
@@ -14,7 +13,7 @@ namespace DevGames.Api.Entities
             Posts = new List<Post>();
         }
 
-        public int Id { get; private set; }
+        public int Id { get; set; }
         public string GameTitle { get; private set; }
         public string Description { get; private set; }
         public string Rules { get; private set; }
