@@ -9,7 +9,7 @@ namespace DevGames.Api.Mappers
         public BoardMappers()
         {
             CreateMap<AddBoardInputModel, Board>();
-            CreateMap<AddBoardInputModel, Post>();
+            CreateMap<AddPostInputModel, Post>();
         }
     }
 }

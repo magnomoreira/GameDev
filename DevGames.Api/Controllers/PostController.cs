@@ -3,8 +3,9 @@ using AutoMapper;
 using DevGames.Api.Entities;
 using DevGames.Api.Model;
 using DevGames.Api.Persistence;
+using DevGames.Api.Persistence.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore;
 
 namespace DevGames.Api.Controllers
 {
@@ -12,45 +13,35 @@ namespace DevGames.Api.Controllers
     [ApiController]
     public class PostController : ControllerBase
     {
-        private readonly DevGamesContext _devGamesContext;
+        private readonly IPostRepository _repository;
         private readonly IMapper _mapper;
         
-        public PostController(DevGamesContext devGamesContext, IMapper mapper)
+        public PostController(IPostRepository repository, IMapper mapper)
         {
-            _devGamesContext = devGamesContext;
+            _repository = repository;
             _mapper = mapper;
         }
         
         [HttpGet]
         public IActionResult GetAll(int id)
         {
-            var responsePost = _devGamesContext.Boards.SingleOrDefault(i => i.Id == id);
-            if (responsePost == null) return NotFound();
-            
-            return Ok(responsePost.Posts);
+            var post = _repository.GetAllByBoard(id);
+            return Ok(post);
         }
 
         [HttpGet("{postId}")]
         public IActionResult GetById(int id, int postId)
         {
-            var responsePost = _devGamesContext.Boards.SingleOrDefault(i => i.Id == id);
-            if (responsePost == null) return NotFound();
-
-            var posts = responsePost.Posts.SingleOrDefault(p => p.Id == id);
-            if (posts == null) return NotFound();
-
-            return Ok(posts);
+            var post = _repository.GetById(id,postId);
+            if (post == null) return NotFound();
+            return Ok(post);
         }
 
         [HttpPost]
         public IActionResult Post(int id, AddPostInputModel model)
         {
-            var responsePost = _devGamesContext.Boards.SingleOrDefault(i => i.Id == id);
-            if (responsePost == null) return NotFound();
-
-            //var posts = new Post(model.Id, model.Title, model.Description);
-            var posts = _mapper.Map<Post>(model);
-            responsePost.AddPost(posts);
+            var posts = new Post(model.Title,model.Description, id);
+            _repository.Add(posts);
             return CreatedAtAction(nameof(GetById), new {id = id , postId = posts.Id}, model);
         }
 
@@ -58,14 +49,14 @@ namespace DevGames.Api.Controllers
         [HttpPost("{postId}/comments")]
         public IActionResult PostComment(int id , int postId, AddCommentInputModel model)
         {
-            var responsePost = _devGamesContext.Boards.SingleOrDefault(i => i.Id == id);
-            if (responsePost == null) return NotFound();
+            var postsExist = _repository.GetById(id, postId);
+            
+            if (postsExist == null) return NotFound();
 
-            var posts = responsePost.Posts.SingleOrDefault(p => p.Id == id);
-            if (posts == null) return NotFound();
-
-            var comments = new Comment(model.Title, model.Description, model.User, posts.Id);
-            posts.AddComments(comments);
+            var comments = new Comment(model.Title, model.Description, model.User, postId);
+            
+            _repository.AddComment(comments);
+            
             return NoContent();
         }
     }

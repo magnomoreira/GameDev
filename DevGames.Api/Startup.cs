@@ -14,6 +14,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DevGames.Api.Mappers;
 using DevGames.Api.Persistence;
+using DevGames.Api.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace DevGames.Api
@@ -37,6 +38,8 @@ namespace DevGames.Api
 			{
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "DevGames.Api", Version = "v1" });
 			});
+			services.AddScoped<IBoardRepository, BoardRepository>();
+			services.AddScoped<IPostRepository, PostRepository>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

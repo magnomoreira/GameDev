@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BdyuAC2BGeQyTs/6QschgOpp5nX1v7KD2hFq6j51oMBHHPOZM/W3GIoiZ5h4dsD0UjhE72BbFsSvh+80idfnIg==",
+  "dgSpecHash": "RGwgTrUGwir+V+42WmgIKd9PHlI+ig8iIEje3fr7gpJ2+PKRLv8zPI7E7/1zFp5GUFMb+iYM+FJU7Xqvn3mIhA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\magno\\OneDrive\\Área de Trabalho\\dev\\DevGames\\DevGames.Api\\DevGames.Api.csproj",
+  "projectFilePath": "C:\\Users\\magno\\OneDrive\\Área de Trabalho\\dev\\DevGames\\DevGAmes.Api\\DevGames.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\magno\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\magno\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",

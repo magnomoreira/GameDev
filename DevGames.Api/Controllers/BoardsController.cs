@@ -1,8 +1,7 @@
-﻿using System.Linq;
-using AutoMapper;
+﻿using AutoMapper;
 using DevGames.Api.Entities;
 using DevGames.Api.Model;
-using DevGames.Api.Persistence;
+using DevGames.Api.Persistence.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevGames.Api.Controllers
@@ -10,44 +9,46 @@ namespace DevGames.Api.Controllers
     [Route("api/[controller]")]
     public class BoardsController : ControllerBase
     {
-        private readonly DevGamesContext _devGamesContext;
+        private readonly IBoardRepository _repository;
         private readonly IMapper _mapper;
 
-        public BoardsController(DevGamesContext devGamesContext, IMapper mapper)
+        public BoardsController(IBoardRepository repository, IMapper mapper)
         {
-            _devGamesContext = devGamesContext;
+            _repository = repository;
             _mapper = mapper;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            return Ok(_devGamesContext.Boards);
+            var response = _repository.GetAll();
+            return Ok(response);
 
         }
 
         [HttpGet("id")]
         public IActionResult GetBYId(int id)
         {
-            var responseBoardId = _devGamesContext.Boards.SingleOrDefault(i => i.Id == id);
-            if (responseBoardId == null) return NotFound();
-            return Ok(responseBoardId);
+            var response = _repository.GetById(id);
+            if (Response == null) return NotFound();
+            return Ok(response);
         }
 
         [HttpPost]
         public IActionResult Post( AddBoardInputModel model)
         {
             var responseBoard = _mapper.Map<Board>(model);
-            _devGamesContext.Boards.Add(responseBoard);
+             _repository.Add(responseBoard);
             return CreatedAtAction("GetById", new {id = responseBoard.Id}, model);
         }
 
         [HttpPut("id")]
         public IActionResult Put(int id, UpdateBoardInputModel model)
         {
-            var responseBoardId = _devGamesContext.Boards.SingleOrDefault(i => i.Id == id);
-            if (responseBoardId == null) return NotFound();
-            responseBoardId.Update(model.Description, model.Rules);
+            var board = _repository.GetById(id);
+            if (board == null) return NotFound();
+            board.Update(model.Description, model.Rules);
+            _repository.Update(board);
             return NoContent();
         }
     }
