@@ -1,17 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
-using System.Threading.Tasks;
 using DevGames.Api.Mappers;
 using DevGames.Api.Persistence;
 using DevGames.Api.Persistence.Repositories;
@@ -36,7 +29,16 @@ namespace DevGames.Api
 			services.AddControllers();
 			services.AddSwaggerGen(c =>
 			{
-				c.SwaggerDoc("v1", new OpenApiInfo { Title = "DevGames.Api", Version = "v1" });
+				c.SwaggerDoc("v1", new OpenApiInfo
+				{
+					Title = "DevGames.Api", Version = "v1" ,
+					Contact = new OpenApiContact
+					{
+						Name = "Magno Moreira",
+						Email = "magnomoreira@yahoo.com",
+						Url = new  Uri("magnoDev.com.br")
+					}
+				});
 			});
 			services.AddScoped<IBoardRepository, BoardRepository>();
 			services.AddScoped<IPostRepository, PostRepository>();

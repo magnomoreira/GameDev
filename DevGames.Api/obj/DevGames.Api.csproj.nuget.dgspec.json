@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\magno\\OneDrive\\Área de Trabalho\\dev\\DevGames\\DevGAmes.Api\\DevGames.Api.csproj": {}
+    "C:\\Users\\magno\\OneDrive\\Área de Trabalho\\dev\\DevGames\\DevGames.Api\\DevGames.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\magno\\OneDrive\\Área de Trabalho\\dev\\DevGames\\DevGAmes.Api\\DevGames.Api.csproj": {
+    "C:\\Users\\magno\\OneDrive\\Área de Trabalho\\dev\\DevGames\\DevGames.Api\\DevGames.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\magno\\OneDrive\\Área de Trabalho\\dev\\DevGames\\DevGAmes.Api\\DevGames.Api.csproj",
+        "projectUniqueName": "C:\\Users\\magno\\OneDrive\\Área de Trabalho\\dev\\DevGames\\DevGames.Api\\DevGames.Api.csproj",
         "projectName": "DevGames.Api",
-        "projectPath": "C:\\Users\\magno\\OneDrive\\Área de Trabalho\\dev\\DevGames\\DevGAmes.Api\\DevGames.Api.csproj",
+        "projectPath": "C:\\Users\\magno\\OneDrive\\Área de Trabalho\\dev\\DevGames\\DevGames.Api\\DevGames.Api.csproj",
         "packagesPath": "C:\\Users\\magno\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\magno\\OneDrive\\Área de Trabalho\\dev\\DevGames\\DevGAmes.Api\\obj\\",
+        "outputPath": "C:\\Users\\magno\\OneDrive\\Área de Trabalho\\dev\\DevGames\\DevGames.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\magno\\AppData\\Roaming\\NuGet\\NuGet.Config",
